@@ -1,9 +1,14 @@
 INCLUDE Irvine32.inc
 .data
-num DWORD 5
+num DWORD ?
+select BYTE 'Choose number of starts : ', 0
 .code
 main proc
-mov ecx, 5
+mov edx, offset select
+call WriteString
+call ReadInt
+mov num, eax
+mov ecx, num
 
 Frist:
 push ecx
