@@ -1,0 +1,40 @@
+INCLUDE Irvine32.inc
+.data
+first BYTE 'Hello',0
+second BYTE ?, 0
+destination BYTE ?, 0
+len DWORD ?
+
+.code
+main proc
+mov eax, LENGTHOF first
+mov len, eax
+lea esi, first
+lea edi, second
+add edi, len
+dec edi
+dec edi
+mov ecx, len
+
+L:
+mov al, [esi]
+mov [edi], al
+inc esi
+dec edi
+loop L
+
+mov ecx, len
+lea esi, destination
+L2:
+mov al, [edi]
+mov [esi], al
+dec edi
+inc esi
+loop L2
+
+mov edx, offset destination
+call WriteString
+call Crlf
+call WaitMsg
+main EndP
+end main
